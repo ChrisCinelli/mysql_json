@@ -1,17 +1,17 @@
-#mysql_json - a MySQL UDF for parsing JSON 
+# mysql_json - a MySQL UDF for parsing JSON 
 -- Works on Ubuntu 12.04.5 on gcc version 4.6.3 with MySQL 5.5 
 
 The UDF introduces one function: json_get, that parses a JSON object or an array and returns one of the properties.
 By using to the UDF it is possible to write queries accessing the properties of JSON objects stored in MySQL.
 
-###Examples:
+### Examples:
 ```
 SELECT json_get('{"a":1}', 'a')       => 1
 SELECT json_get('{"a":1}', 'b')       => NULL (variable missing)
 SELECT json_get('[1,2,3]', 2)         => 3
 SELECT json_get('{"a":[2]}', 'a', 0)  => 2
 
-#Also it manages the edge cases in this way:
+# Also it manages the edge cases in this way:
 
 SELECT json_get('{"a":{"b":2}}', 'a') => object
 SELECT json_get('{"a":[1,2,3]}', 'a') => array
@@ -41,7 +41,7 @@ SELECT id,data FROM message WHERE json_get(data,'title') LIKE '%Article%';
 ```
 
 
-##Installation:
+## Installation:
 Make sure you have g++ and the MySQL client dev installed:
 ```
 % sudo apt-get install g++ libmysqlclient-dev
@@ -58,7 +58,7 @@ Then compile it:
 mysql> create function json_get returns string soname 'mysql_json.so';
 ```
 
-###See Also
+### See Also
 [Original Author Blog]
 
 [original author blog]:http://blog.kazuhooku.com/2011/09/mysqljson-mysql-udf-for-parsing-json.html
